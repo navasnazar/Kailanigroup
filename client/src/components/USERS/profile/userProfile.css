@@ -1,0 +1,94 @@
+.card-body {
+    background: black !important;
+}
+.image_field{
+    display: initial;
+}
+.history_div{
+    display: grid;
+    grid: 4 1;
+    justify-content: center;
+}
+.heading_history{
+    color: var(--color-primary);
+    font-size: 20px;
+    font-style: italic;
+}
+.serviceList_container{
+    padding: 1rem 8rem;
+}
+.list_view{
+    margin-bottom: 1rem;
+}
+.list_item_view{
+    margin-left: 1px;
+    margin-right: -50px;
+}
+.list_view_history{
+    box-shadow: 0px 15px 10px -15px rgb(243, 240, 240); 
+    text-align: center;
+    padding-bottom: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.icon_div{
+    text-align: -webkit-center;
+    margin-top: 1.5rem;
+}
+
+
+.qtyIncrease_Button {
+    text-align: center;
+    line-height: 50px;
+    background: #333;
+    border-radius: 15%;
+    font-size: 30px;
+    color: #666;
+    transition: .5s;
+    margin-bottom: 1rem;
+  }
+  
+  .qtyIncrease_Button::before {
+    border-radius: 50%;
+    background: #ffee10;
+    transition: .5s;
+    transform: scale(.9);
+    z-index: -1;
+  }
+  
+  .qtyIncrease_Button:hover::before {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #ffee10;
+  }
+  
+  .qtyIncrease_Button:hover {
+    color: #ffee10;
+    box-shadow: 0 0 5px #ffee10;
+    text-shadow: 0 0 5px #ffee10;
+  }
+  
+  .list_view_header{
+    text-align: center;
+    color: var(--color-primary);
+  }
+
+
+
+/* =========== MEDIA QUERIES (MEDIUM DEVICES)========== */
+
+@media screen and (max-width:1024px) {
+   
+}
+
+/* =========== MEDIA QUERIES (SMALL DEVICES)========== */
+
+@media screen and (max-width:600px) {
+    .qtyIncrease_Button {
+        width: auto;
+        background-color: transparent;
+      }
+
+      .serviceList_container{
+        padding: 1rem 1rem;
+    }
+}

@@ -1,0 +1,11 @@
+.container.itemView__container{
+    width: 100%;
+    height: 500px;
+
+    
+}
+
+.itemView__main-image{
+    object-fit:fill;
+}
+

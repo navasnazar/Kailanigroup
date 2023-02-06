@@ -1,0 +1,25 @@
+.main_container{
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.invoice_container{
+    border: solid 1px black;
+}
+
+.heading_div{
+    font-weight: bold;
+    font-size: 20px !important;
+    
+}
+.print_div{
+    display: flex;
+    justify-content: end;
+    padding-left: 6rem;
+}
+.print_file{
+    width: 40px;
+    height: 40px;
+}

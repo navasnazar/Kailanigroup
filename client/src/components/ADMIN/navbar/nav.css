@@ -1,0 +1,89 @@
+nav {
+    background: rgba(0,0,0,0.3);
+    width: max-content;
+    display: block;
+    padding: 0.7rem 1.7rem;
+    z-index: 2;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 2rem;
+    display: flex;
+    gap: 0.8rem;
+    border-radius: 3rem;
+    backdrop-filter: blur(15px);
+}
+
+nav a{
+    background: transparent;
+    padding: 0.9rem;
+    border-radius: 50%;
+    display: flex;
+    color: var(--color-light);
+    font-size: 1.1rem;
+}
+
+nav a:hover{
+    background: rgba(0, 0, 0, 0.3);
+    transition: 1s;
+
+}
+
+nav a.active{
+    background: var(--color-primary);
+    color: var(--color-bg);
+}
+
+
+
+nav .registerButton{
+    background: transparent;
+    padding: 0.9rem;
+    height: auto;
+    border-radius: 50%;
+    display: flex;
+    color: var(--color-light);
+    font-size: 1.1rem;
+}
+
+nav .registerButton:hover{
+    background: rgba(0, 0, 0, 0.3);
+}
+
+nav .registerButton.active{
+    background: var(--color-primary);
+    color: var(--color-bg);
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+.css-dev-only-do-not-override-acm2ia.ant-btn-primary {
+    color:var(--color-bg);
+    background-color: var(--color-primary);
+    /* box-shadow: 0 2px 0 rgb(5 145 255 / 10%); */
+}
+
+.css-dev-only-do-not-override-acm2ia.ant-modal .ant-modal-content {
+    position: relative;
+    background-color:var(--color-light);
+    background-clip: padding-box;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px 0 rgba(18, 18, 18, 0.08), 0 3px 6px -4px rgb(0 0 0 / 12%), 0 9px 28px 8px rgb(0 0 0 / 5%);
+    pointer-events: auto;
+    padding: 20px 24px;
+}
+
+.css-dev-only-do-not-override-acm2ia.ant-modal .ant-modal-title{
+    background:var(--color-light);
+}

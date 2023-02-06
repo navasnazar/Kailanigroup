@@ -1,0 +1,98 @@
+nav {
+    background: rgba(0,0,0,0.3);
+    width: max-content;
+    display: block;
+    padding: 0.7rem 1.7rem;
+    z-index: 2;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 2rem;
+    display: flex;
+    gap: 0.8rem;
+    border-radius: 3rem;
+    backdrop-filter: blur(15px);
+}
+
+nav a{
+    background: transparent;
+    padding: 0.9rem;
+    border-radius: 50%;
+    display: flex;
+    color: var(--color-light);
+    font-size: 1.1rem;
+}
+
+nav a:hover{
+    background: rgba(0, 0, 0, 0.3);
+}
+
+nav a.active{
+    background: var(--color-primary);
+    color: var(--color-bg);
+}
+
+
+
+nav .registerButton{
+    background: transparent;
+    padding: 0.9rem;
+    height: auto;
+    border-radius: 50%;
+    display: flex;
+    color: var(--color-light);
+    font-size: 1.1rem;
+}
+
+nav .registerButton:hover{
+    background: rgba(0, 0, 0, 0.3);
+}
+
+nav .registerButton.active{
+    background: var(--color-primary);
+    color: var(--color-bg);
+}
+
+
+
+
+.css-dev-only-do-not-override-acm2ia.ant-btn-primary {
+    background-color: var(--color-primary);
+    /* box-shadow: 0 2px 0 rgb(5 145 255 / 10%); */
+}
+
+.loginSection{
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+}
+
+
+/* Login */
+.login-form {
+  max-width: 300px;
+}
+.login-form-forgot {
+  float: right;
+}
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+.login-form-button {
+  width: 100%;
+}
+
+.navBar_style{
+    display: flex;
+}
+
+.login_back{
+    color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+}
+.validation_err{
+    color: rgb(255, 0, 0);
+    font-size: 15px;
+    font-style: italic;
+}

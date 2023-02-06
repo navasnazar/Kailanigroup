@@ -1,0 +1,6 @@
+.main_adminservices_container{
+    flex: 4;
+    background-color: rgb(2, 2, 2);
+    height: 100vh;
+    color: var(--color-white);
+}

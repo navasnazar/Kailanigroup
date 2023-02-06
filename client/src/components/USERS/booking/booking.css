@@ -1,0 +1,86 @@
+#home{
+    margin-top: 0;
+}
+
+
+.imageBox{
+    width: 100%;
+    object-fit: cover;
+   
+}
+
+.box img{
+    border-radius: 1.5rem;
+    width: 100%;
+    object-fit: cover;
+    height: auto;
+}
+
+.box .flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 2rem 10rem;
+}
+
+.box .flex h3{
+    font-size: 23px;
+    color: var(--color-white);
+    text-transform: capitalize;
+    text-align: center;
+    justify-content: space-between;
+}
+.heading_image{
+    width: auto;
+    padding: 0.5rem !important;
+    text-transform: capitalize;
+}
+.heading_div{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    align-items: center;
+    padding-bottom: 6rem;
+}
+
+/* =======availability section start======= */
+
+.availability form .flex{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 0 6rem;
+ }
+ 
+ .availability .box{
+    flex: .5 1 10rem;
+ }
+ 
+ .availability form .flex .box p{
+    font-size: 1rem;
+    color: var(--color-primary);
+ }
+ 
+ .availability form .flex .box .input{
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 1rem;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    border-bottom: .1rem solid rgba(220, 198, 156, .3);
+    margin: 1rem 0;
+ }
+ 
+ .availability form .flex .box input[type="date"]::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+ }
+
+ .availability form .btn{
+    margin: auto;
+ }
+ 
+ /* =======availability section end======= */
+
+

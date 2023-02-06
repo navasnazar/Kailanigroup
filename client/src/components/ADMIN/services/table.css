@@ -1,0 +1,15 @@
+.service_button{
+    padding: 1rem;
+    align-items: flex-end;
+}
+.validation{
+    color: red;
+    margin-left: 2rem;
+}
+.image_field{
+    display: flex;
+}
+.image_btn{
+    margin: 2rem;
+    display: flex;
+}

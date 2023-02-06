@@ -1,0 +1,115 @@
+#gallery{
+    margin-top: 0;
+}
+
+.gallery__container{
+    display: grid;
+    grid-template-columns: 35% 50%;
+    gap: 15%;
+    margin-top: 8rem;
+    padding: 3rem;
+}
+
+.gallery__pic1 {
+    width:  100%;
+    aspect-ratio: 1.6/1;
+    border-radius: 2rem;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        var(--color-primary),
+        transparent
+    );
+    display: grid;
+    place-items: center;
+}
+
+.gallery__pic2 {
+    width:  100%;
+    aspect-ratio: 1.2/1;
+    border-radius: 2rem;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        var(--color-primary),
+        transparent
+    );
+    display: grid;
+    place-items: center;
+}
+
+.gallery__pic3 {
+    width:  100%;
+    aspect-ratio: 2/1;
+    border-radius: 2rem;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        var(--color-primary),
+        transparent
+    );
+    display: grid;
+    place-items: center;
+}
+
+.gallery__pic4 {
+    width:  100%;
+    aspect-ratio: 1.8/1;
+    border-radius: 2rem;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        var(--color-primary),
+        transparent
+    );
+    display: grid;
+    place-items: center;
+}
+
+.gallery__pic-image {
+    border-radius: 2rem;
+    overflow: hidden;
+    transform: rotate(10deg);
+    transition: var(--transition);
+}
+
+.gallery__pic-image:hover{
+    transform: rotate(0);
+}
+
+.gallery__content p{
+    margin: 2rem 0 2.6rem;
+    color: var(--color-light);
+}
+
+/* =========== MEDIA QUERIES (MEDIUM DEVICES)========== */
+
+@media screen and (max-width:1024px) {
+    .gallery__container{
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .gallery__me{
+        width: 50%;
+        margin: 2rem auto 4rem;
+    }
+    .gallery__content p{
+        margin: 1rem 0 1.5rem;
+    }
+}
+
+/* =========== MEDIA QUERIES (SMALL DEVICES)========== */
+
+@media screen and (max-width:600px) {
+    .gallery__pic{
+        width: 65%;
+        margin: 0 auto 3rem;
+    }
+    .gallery__content{
+        text-align: center;
+        margin-top: -15rem;
+    }
+    .gallery__content p{
+        margin: 1.5rem 0;
+    }
+}
