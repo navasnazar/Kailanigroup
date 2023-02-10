@@ -84,3 +84,23 @@
  /* =======availability section end======= */
 
 
+/* =========== MEDIA QUERIES (MEDIUM DEVICES)========== */
+
+@media screen and (max-width:1024px) {
+   
+}
+
+/* =========== MEDIA QUERIES (SMALL DEVICES)========== */
+
+@media screen and (max-width:600px) {
+    .swiper-button-prev {
+        display: none !important;
+    }
+    .swiper-button-next {
+        display: none !important;
+    }
+    .availability{
+        margin-top: -2rem !important;
+        margin: -4rem !important;
+    }
+}

@@ -1,45 +1,67 @@
 import React from 'react'
+import './userTable.css'
 import MaterialTable from 'material-table'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import axios from 'axios'
-
-
-const userDetails = [
-    {firstName:'Navas', lastName:"Nazar", email:'navas@gmail.com',mobile:9567819494, status:1},
-    {firstName:'Akash', lastName:"K", email:'akash@gmail.com',mobile:9524343494, status:1},
-    {firstName:'Akhil', lastName:"Suresh", email:'akhil@gmail.com',mobile:9567812345, status:1},
-    {firstName:'Afzal', lastName:"Muhammed", email:'afzal@gmail.com',mobile:9546256294, status:1},
-    {firstName:'Aswanth', lastName:"K", email:'aswanth@gmail.com',mobile:9626819494, status:1},
-]
-const userStatus=[
-    {id:0,title:"Deactive"},
-    {id:1,title:"Active"},
-]
-
-
+import { alpha, styled } from '@mui/material/styles';
+import { pink } from '@mui/material/colors';
+import {axiosAdminInstance} from '../../../Instance/Axios'
+import { Switch, Space } from 'antd';
+import {CloseOutlined, CheckOutlined} from '@ant-design/icons'
+import {ProcessingButton} from './ProcessingButton'
 
 const UserTable = () => {
 
-    const [userData, setUserData]=useState(userDetails)
-    const [status, setStatus]=useState({})
-    const [blockStatus, setBlockStatus]=useState({})
-    
+    const [userData, setUserData]=useState([])
+    const [render, setRender]=useState()
+
+
+    useEffect(()=>{
+        getAllUsers();
+    },[render])
+
+
+   
+
+    const getAllUsers = async()=>{
+        const token = localStorage.getItem('admin')
+        const response = await axiosAdminInstance.get('/getUsers',
+        {
+        headers: {Authorization: token}
+        }
+        ).then((response)=>{
+            if(response.data.status=='done'){
+                setUserData(response.data.data)
+            }
+            if(response.data.status=='err'){
+                let msg = response.data.msg
+            }
+        })
+    }
+
+    const handleBlockStatus = async (data)=>{
+        console.log(data)
+        let blockedUserId = data._id
+        const token = localStorage.getItem('admin')
+        const response = await axiosAdminInstance.post('/blockStatus', {blockedUserId},
+        {
+        headers: {Authorization: token}
+        }
+        ).then((response)=>{
+            if(response.data.status=='done'){
+                setTimeout(() => {
+                  let x = Math.random() * 100;
+                  setRender(x)
+                }, 500);
+            }
+        })
+    }
     const columns=[
-        {title:'First Name', field:'firstName'},
-        {title:'Last Name', field:'lastName'},
+        {title:'Full Name', field:'name'},
         {title:'Email ID', field:'email'},
         {title:'Mobile', field:'mobile'},
-        {title:'Status', field:'status',lookup:status},
+        {title:'Block Status', field:'blockStatus'},
     ] 
-    useEffect(()=>{
-        const status={}
-        userStatus.map(row=>status[row.id]=row.title)
-        setStatus(status);
-    },[])
-
-    
-
 
   return (
     <div>
@@ -52,12 +74,11 @@ const UserTable = () => {
                 exportButton:true
             }}
             actions={[
-                {icon:()=><button className='btn btn-primary'>Block/Unblock</button>,
+                {icon:(data)=> <ProcessingButton/>,
                 tooltip:"Block/Unblock" ,
-                onClick:(e, data)=>setBlockStatus(data)
+                onClick:(e, data)=>handleBlockStatus(data)
                }
             ]}
-            
         />
         
 

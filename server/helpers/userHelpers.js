@@ -99,7 +99,7 @@ module.exports={
             })
         })
     },
-    AddToCart:(userDetails, serviceId, bookingDetails)=>{
+    AddToCart:(userDetails, serviceId, bookingDetails, dateRange)=>{
         let qty =1
         if(!bookingDetails.adults){
             bookingDetails.adults='1';
@@ -110,14 +110,14 @@ module.exports={
         if(!bookingDetails.rooms){
             bookingDetails.rooms='1';
         }
-        
+        console.log('dfgdghf',dateRange);
         return new Promise(async(resolve, reject)=>{
             let userCart = await CartDB.findOne({userId:userDetails.userID})
             if(userCart){
                 await CartDB.updateOne({userId:userDetails.userID},
                     {
-                        check_in:bookingDetails.check_in,
-                        check_out:bookingDetails.check_out,
+                        check_in:dateRange[0],
+                        check_out:dateRange[1],
                         adults: bookingDetails.adults,
                         child: bookingDetails.child,
                         rooms: bookingDetails.rooms,
@@ -169,8 +169,8 @@ module.exports={
                             qty:1,
                         }
                     ],
-                    check_in:bookingDetails.check_in,
-                    check_out:bookingDetails.check_out,
+                    check_in:dateRange[0],
+                    check_out:dateRange[1],
                     adults: bookingDetails.adults,
                     child: bookingDetails.childs,
                     rooms: bookingDetails.rooms,
@@ -181,7 +181,7 @@ module.exports={
             }
         })
     },
-    RemoveToCart:(userDetails, serviceId, bookingDetails)=>{
+    RemoveToCart:(userDetails, serviceId, bookingDetails, dateRange)=>{
         return new Promise(async (resolve, reject)=>{
             await CartDB.updateOne({userId:userDetails.userID},
             {
@@ -300,7 +300,7 @@ module.exports={
             }
         })
     },
-    dateConfirmation:(userId, bookingDetails)=>{
+    dateConfirmation:(userId, bookingDetails, dateRange)=>{
         let validation = {done:false, err:false}
         let qty =1
         if(!bookingDetails.adults){
@@ -312,13 +312,16 @@ module.exports={
         if(!bookingDetails.rooms){
             bookingDetails.rooms='1';
         }
+        if(!dateRange[1]){
+            dateRange[1]=dateRange[0]
+        }
         return new Promise(async(resolve, reject)=>{
             let userCart = await CartDB.findOne({userId:userId})
             if(userCart){
                 await CartDB.updateOne({userId:userId},
                     {$set:{
-                        check_in:bookingDetails.check_in,
-                        check_out:bookingDetails.check_out,
+                        check_in:dateRange[0],
+                        check_out:dateRange[1],
                         adults: bookingDetails.adults,
                         child: bookingDetails.childs,
                         rooms: bookingDetails.rooms,
@@ -380,7 +383,7 @@ module.exports={
     getServices:(userId)=>{
         return new Promise(async(resolve, reject)=>{
            let data = await BookingDB.find({userId:userId})
-           if(data[0].userId){
+           if(data.length!=0){
                 resolve(data)
            }else{
                 resolve()

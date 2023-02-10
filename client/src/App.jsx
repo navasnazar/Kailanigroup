@@ -38,7 +38,7 @@ const App = () => {
             <Route path="/invoice" element={user ? <FinaleInvoice/> : <Navigate to='/'/>} />
             <Route path="/PreInvoice" element={user ? <PreBookingInv/> : <Navigate to='/'/>} />
             <Route exact path="/*" element={<Err404/>} />
-
+    
             <Route exact path="/admin/login" element={admin? <AdminHome/> : <AdminLogin/>} />
             <Route exact path="/admin" element={admin ? <AdminHome/> : <AdminLogin/>} />
             <Route exact path="/admin/resetpass/:token" element={<ResetPassword/>} />

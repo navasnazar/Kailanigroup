@@ -72,6 +72,13 @@
     color: var(--color-primary);
   }
 
+  .noservice_err{
+    color: var(--color-white);
+    font-style: italic;
+    display: flex;
+    justify-content: center;
+  }
+
 
 
 /* =========== MEDIA QUERIES (MEDIUM DEVICES)========== */

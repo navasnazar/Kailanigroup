@@ -1,8 +1,9 @@
-var express = require('express');
+const express = require('express');
 const { response } = require('../app');
 const router = express.Router();
 const userController = require('../controllers/userController')
 const userAuthentication = require('../controllers/userAuthentication')
+const app = require('../app')
 
 
 router.post('/get_available_services', userAuthentication, userController.getAvailableServices)

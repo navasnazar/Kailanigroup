@@ -1,6 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
-import './adminBookingDetails.css'
+import './bookingHistory.css'
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -14,12 +13,12 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import {axiosAdminInstance} from '../../../Instance/Axios'
 import moment from "moment";
 import {FaFileInvoice} from 'react-icons/fa'
 import {useDispatch} from 'react-redux'
 import {getPreBookingInvoiceAdmin} from '../../../redux/adminReducer'
 import { useNavigate } from 'react-router-dom'
+import {getPreBookingInvoice} from '../../../redux/userReducer'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -28,46 +27,27 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
+const BookingHistory = (props) => {
 
-const CheckOutBooking = () => {
+    const serviceData =  props.serviceData
 
-  const [bookingData, setBookingData]=useState([])
-  const [dataErr, setDataErr]=useState('')
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    getAllBooking();
-    
-  }, [])
-
-  const getAllBooking = async()=>{
-    const token = localStorage.getItem('admin')
-    const response = await axiosAdminInstance.get('/getAllBooking',
-    {
-      headers: {Authorization: token}
-    }
-    ).then((data)=>{
-      if(data.data.status=='done'){
-        setBookingData(data.data.data)
-      }
-      if(data.data.status=='err'){
-        setDataErr(data.data.msg)
-      }
-    })
-  }
-
-  const handleInvoice = (id)=>{
-    dispatch(getPreBookingInvoiceAdmin(id)) 
-    navigate('/admin/PreInvoice')
-  }
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
   
+      const getInvoice = async (id)=>{
+        dispatch(getPreBookingInvoice(id)) 
+        navigate('/PreInvoice')
+      }
 
-  function Row(props) {
-    const { row } = props;
-    const [open, setOpen] = React.useState(false);
+      const handleInvoice = (id)=>{
+        dispatch(getPreBookingInvoiceAdmin(id)) 
+        navigate('/admin/PreInvoice')
+      }
+
+    function Row(props) {
+      const { row } = props;
+      const [open, setOpen] = React.useState(false);
   
     return (
       <React.Fragment>
@@ -131,39 +111,33 @@ const CheckOutBooking = () => {
      
     );
   }
-  
-  //filter data
-  const filterData = bookingData.filter((item)=>{
-    if(item.conform_check_out){
-        return item
-    }
-})
-const rows = filterData.reverse();
+    const rows = serviceData
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <TableContainer component={Paper}>
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                <TableCell style={{fontWeight: 'bold'}} align="left">Booking Date</TableCell>
-                <TableCell style={{fontWeight: 'bold'}} align="left">Mobile Number</TableCell>
-                <TableCell style={{fontWeight: 'bold'}} align="left">Chech_In</TableCell>
-                <TableCell style={{fontWeight: 'bold'}} align="left">Check_Out</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                  <Row key={row._id} row={row}/>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-    </ThemeProvider>
-        
+    <div className='history_constainer'>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell style={{fontWeight: 'bold'}} align="left">Booking Date</TableCell>
+                  <TableCell style={{fontWeight: 'bold'}} align="left">Mobile Number</TableCell>
+                  <TableCell style={{fontWeight: 'bold'}} align="left">Chech_In</TableCell>
+                  <TableCell style={{fontWeight: 'bold'}} align="left">Check_Out</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                    <Row key={row._id} row={row}/>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+      </ThemeProvider>
+    </div>
   )
 }
 
-export default CheckOutBooking
+export default BookingHistory

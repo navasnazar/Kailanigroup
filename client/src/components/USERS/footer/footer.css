@@ -4,6 +4,7 @@ footer{
     text-align: center;
     font-size: 0.9rem;
     margin-top: 7rem;
+    
 }
 
 footer a{
@@ -25,6 +26,7 @@ footer a{
     justify-content: center;
     gap: 2rem;
     margin: 0 auto 3rem;
+    text-decoration: none;
 }
 
 .footer__socials{

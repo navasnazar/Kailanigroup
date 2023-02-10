@@ -4,13 +4,17 @@ const UserDB = require('../models/userModel/userSchema')
 const userAuthentication = async (req, res, next) => {
   // verify user is authenticated
   const token = req.header("Authorization")
-  
+
 
   try {
     const { userID } = jwt.verify(token, process.env.SECRET_TOKEN_USER)
+    req.user = await UserDB.findOne({_id:userID })
 
-    req.user = await UserDB.findOne({ userID }).select('_id')
-    next()  
+    if(req.user.blockStatus==false){
+      next()  
+    }else{
+      res.json({status:'blocked', msg:'The user is blocked list'})
+    }
 
   } catch (error) {
     console.log(error)

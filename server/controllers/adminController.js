@@ -134,5 +134,20 @@ module.exports={
         adminHelpers.ChangeCheckOutStatus(id).then((response)=>{
             res.json({status:'done'})
         })
+    }),
+    getUsers:((req, res)=>{
+        adminHelpers.getAllUsers().then((response)=>{
+            if(response){
+                res.json({status:'done', data: response})
+            }else{
+                res.json({status:'err', msg: 'there is no users'})
+            }
+        })
+    }),
+    blockedStatus:((req, res)=>{
+        let blockedUserId = req.body.blockedUserId
+        adminHelpers.blockedStatusChange(blockedUserId).then((response)=>{
+            res.json({status:'done', data: response})
+        })
     })
 } 

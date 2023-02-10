@@ -8,7 +8,6 @@ const Header = () => {
   return (
     <header>
       <div className="container header__container">
-         {/* <h1>KAILANI</h1> */}
          <div className="logo">
             <video autoPlay muted loop src={logo} alt='logo'></video>
          </div>
@@ -16,7 +15,7 @@ const Header = () => {
          <CTA/>
          <HeaderSocials/>
          
-         <a href="#contact" className='scroll__down'>Scroll Down</a>
+         <a href="#services" className='scroll__down'>Show Services</a>
       </div>
     </header>
   )

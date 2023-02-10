@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 module.exports={
     getAvailableServices:((req, res)=>{
         const data = req.body
+        console.log('data :', data);
         userHelpers.findServices(data).then((response)=>{
             if(response==='data not fount'){
                 res.json({status:'Err'})
@@ -60,7 +61,8 @@ module.exports={
         let userDetails = req.body.user
         let serviceId = req.body.id
         let bookingDetails = req.body.bookingDetails
-        userHelpers.AddToCart(userDetails, serviceId, bookingDetails).then((response)=>{
+        let dateRange = req.body.dateRange
+        userHelpers.AddToCart(userDetails, serviceId, bookingDetails, dateRange).then((response)=>{
             res.json({status:'done'})
         })
     }),
@@ -68,7 +70,8 @@ module.exports={
         let userDetails = req.body.user
         let serviceId = req.body.id
         let bookingDetails = req.body.bookingDetails
-        userHelpers.RemoveToCart(userDetails, serviceId, bookingDetails).then((response)=>{
+        let dateRange = req.body.dateRange
+        userHelpers.RemoveToCart(userDetails, serviceId, bookingDetails, dateRange).then((response)=>{
             res.json({status:'done'})
         })
     }),
@@ -101,7 +104,8 @@ module.exports={
     dateConfirm:((req, res)=>{
         let userId = req.body.user.userID
         let bookingDetails = req.body.bookingDetails
-        userHelpers.dateConfirmation(userId, bookingDetails).then((response)=>{
+        let dateRange = req.body.dateRange
+        userHelpers.dateConfirmation(userId, bookingDetails, dateRange).then((response)=>{
             if(response.done){
                 res.json({status:'done'})
             }

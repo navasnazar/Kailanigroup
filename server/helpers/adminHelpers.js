@@ -6,6 +6,7 @@ const e = require('express');
 const bcrypt = require('bcrypt')
 const objectId=require('mongodb').ObjectId
 const BookingDB = require('../models/userModel/BookingSchema')
+const UserDB = require('../models/userModel/userSchema')
 
 const {
     SECRET_TOKEN_ADMIN
@@ -217,6 +218,46 @@ module.exports={
                     resolve(validation)
                 })
             }
+        })
+    },
+    getAllUsers:()=>{
+        return new Promise(async(resolve, reject)=>{
+            await UserDB.find().then((data)=>{
+                if(data){
+                    resolve(data)
+                }else{
+                    resolve()
+                }
+            }).catch((err)=>{
+                console.log(err);
+            })
+        })
+    },
+    blockedStatusChange:(blockedUserId)=>{
+        return new Promise(async(resolve, reject)=>{
+            await UserDB.findOne({_id:blockedUserId}).then((user)=>{
+                if(user.blockStatus==false){
+                    UserDB.updateOne({_id:blockedUserId},
+                    {$set:{
+                        blockStatus: true
+                        }
+                    }).then((response)=>{
+                        resolve()
+                    }).catch((err)=>{
+                        console.log(err);
+                    })
+                }else{
+                    UserDB.updateOne({_id:blockedUserId},
+                    {$set:{
+                        blockStatus: false
+                        }
+                    }).then((response)=>{
+                        resolve()
+                    }).catch((err)=>{
+                        console.log(err);
+                    })
+                }
+            })
         })
     }
 }

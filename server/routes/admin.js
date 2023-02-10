@@ -19,6 +19,7 @@ router.post('/statusChange', adminAuthentication, adminController.StatusChange)
 router.post('/CheckInChange', adminAuthentication, adminController.CheckInChange)
 router.post('/CheckOutChange', adminAuthentication, adminController.CheckOutChange)
 router.post('/bookingDelete', adminAuthentication, adminController.DeleteBooking)
-
+router.get('/getUsers', adminAuthentication, adminController.getUsers)
+router.post('/blockStatus', adminAuthentication, adminController.blockedStatus)
 
 module.exports = router;        

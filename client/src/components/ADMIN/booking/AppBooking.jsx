@@ -20,7 +20,14 @@ import {FaFileInvoice} from 'react-icons/fa'
 import {useDispatch} from 'react-redux'
 import {getPreBookingInvoiceAdmin} from '../../../redux/adminReducer'
 import { useNavigate } from 'react-router-dom'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const AppBookingDetails = () => {
 
@@ -134,7 +141,9 @@ const AppBookingDetails = () => {
   const rows = filterData.reverse();
 
   return (
-        <TableContainer component={Paper}>
+    <ThemeProvider theme={darkTheme}>
+    <CssBaseline />
+    <TableContainer component={Paper}>
           <Table aria-label="collapsible table">
             <TableHead>
               <TableRow>
@@ -152,6 +161,7 @@ const AppBookingDetails = () => {
             </TableBody>
           </Table>
         </TableContainer>
+  </ThemeProvider>
   )
 }
 

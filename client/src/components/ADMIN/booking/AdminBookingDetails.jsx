@@ -32,6 +32,14 @@ import CheckInBooking from './CheckInBooking'
 import CheckOutBooking from './CheckOutBooking'
 import { Menu, Dropdown, Button } from 'antd';
 import {ImCross} from 'react-icons/im'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const AdminBookingDetails = () => {
 
@@ -313,6 +321,8 @@ const AdminBookingDetails = () => {
     return(
       <>
       <p>{dataErr}</p>
+      <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
       <ToastContainer/>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
@@ -334,6 +344,9 @@ const AdminBookingDetails = () => {
           </TableBody>
         </Table>
       </TableContainer>
+    </ThemeProvider>
+
+      
       </>
     )
   }

@@ -8,8 +8,8 @@ const userAuthentication = async (req, res, next) => {
 
   try {
     const { admin } = jwt.verify(token, process.env.SECRET_TOKEN_ADMIN)
-    
-    req.admin = await AdminDB.findOne({ admin }).select('username')
+    req.user = await AdminDB.findOne({username:admin})
+  
     next()  
 
   } catch (error) {

@@ -8,7 +8,8 @@ import {useDispatch} from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {axiosUserInstance} from '../../../Instance/Axios'
-
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const BookingAvailability = () => {
 
@@ -30,13 +31,17 @@ const BookingAvailability = () => {
     const [render, setRender]=useState(0)
     const [buttonShow, setButtonShow]=useState(true)
 
-    
+    const [dateRange, setDateRange] = useState([null, null]);
+    const [startDate, endDate] = dateRange;
+
+   
 
     useEffect(() => {
         getCart();
     }, [render])
 
     
+
 
     const getCart = ()=>{
         return new Promise(async(resolve, reject)=>{
@@ -63,13 +68,15 @@ const BookingAvailability = () => {
         })
     }
 
+    console.log('available data :', availableData);
+
     const form = useRef();
 
     const handleSubmitForm = async (e)=>{
         const token = localStorage.getItem('userToken')
         e.preventDefault();
         dispatch(getAvailableDate(availableData))
-        const response = await axiosUserInstance.post('/get_available_services',availableData, 
+        const response = await axiosUserInstance.post('/get_available_services',{availableData: availableData, dateRange:dateRange}, 
         {
             headers: {Authorization: token}
         }
@@ -83,7 +90,7 @@ const BookingAvailability = () => {
     const selectService = async (data)=>{
         const token = localStorage.getItem('userToken')
         setSelectedData(true)
-        const response = await axiosUserInstance.post('/addtoCart',{user: user, id: data, bookingDetails: availableData}, 
+        const response = await axiosUserInstance.post('/addtoCart',{user: user, id: data, bookingDetails: availableData, dateRange:dateRange}, 
         {
             headers: {Authorization: token}
         }
@@ -95,7 +102,7 @@ const BookingAvailability = () => {
     const selectRMService = async (data)=>{
         const token = localStorage.getItem('userToken')
         setSelectedData(false)
-        const response = await axiosUserInstance.post('/removetoCart',{user: user, id: data, bookingDetails: availableData},
+        const response = await axiosUserInstance.post('/removetoCart',{user: user, id: data, bookingDetails: availableData, dateRange:dateRange},
         {
             headers: {Authorization: token}
         }
@@ -108,7 +115,7 @@ const BookingAvailability = () => {
 
     const dateSubmition = async ()=>{
         const token = localStorage.getItem('userToken')
-        const response = await axiosUserInstance.post('/dateConfirm',{user: user, bookingDetails: availableData},
+        const response = await axiosUserInstance.post('/dateConfirm',{user: user, bookingDetails: availableData, dateRange:dateRange},
         {
             headers: {Authorization: token}
         }
@@ -141,19 +148,32 @@ const BookingAvailability = () => {
     }
 
 
+
   return (
     <div>
         <section className="availability" id="availability">
             <form ref={form} onSubmit={handleSubmitForm}>
                 <div className="flex">
                     <div className="box">
-                        <p>Check in</p>
-                        <input onChange={updateData} type="date" name="check_in" className="input" required/> 
+                        <p>Pick Your Date</p>
+                        <DatePicker
+                            placeholderText='Pickup your Date'
+                            className='datepickerItem'
+                            dateFormat="dd/MM/yyyy"
+                            minDate={new Date()}
+                            selectsRange={true}
+                            startDate={startDate}
+                            endDate={endDate}
+                            onChange={(update) => {
+                                setDateRange(update);
+                            }}
+                            withPortal
+                            />
                     </div>
-                    <div className="box">
+                    {/* <div className="box">
                         <p>Check out</p>
                         <input onChange={updateData} type="date" name="check_out" className="input" required/>
-                    </div>
+                    </div> */}
                     <div className="box">
                         <p>Adults</p>
                         <select onChange={updateData} name="adults" className="input" required>

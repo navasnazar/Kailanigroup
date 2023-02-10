@@ -3,19 +3,18 @@ import './footer.css'
 import {FaFacebookF} from 'react-icons/fa'
 import {GrInstagram} from 'react-icons/gr'
 import {GrTwitter} from 'react-icons/gr'
+import { NavLink } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className='footer_container'>
       <a href="#" className='footer__logo'>KAILANI</a>
 
       <ul className='permalinks'>
-        <li><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#blogs">Blogs</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact Us</a></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/profile">Profile</NavLink></li>
+        <li><NavLink to="/gallery">Gallery</NavLink></li>
+        <li><NavLink to="/booking">Services</NavLink></li>
       </ul>
 
       <div className="footer__socials">

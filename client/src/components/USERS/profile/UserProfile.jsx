@@ -3,7 +3,6 @@ import './userProfile.css'
 import {Link} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import {axiosUserInstance} from '../../../Instance/Axios'
-import {FaFileInvoice} from 'react-icons/fa'
 import {
   MDBCol,
   MDBContainer,
@@ -27,6 +26,7 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { useNavigate } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {getPreBookingInvoice} from '../../../redux/userReducer'
+import BookingHistory from './BookingHistory'
 
 
 export default function ProfilePage() {
@@ -66,12 +66,11 @@ export default function ProfilePage() {
     }
     ).then((resp)=>{
       if(resp.data.status=='done'){
-        let services =  resp.data.data 
-
-        setServiceData(services.reverse())
+        let services =  resp.data.data
+          setServiceData(services.reverse())
       }
       if(resp.data.status=='err'){
-        setDataErr('No Services Booking')
+        setDataErr('**No Booking Available')
       }
     })
   }
@@ -134,40 +133,16 @@ export default function ProfilePage() {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-          {/* <BookingHistory/> */}
         </MDBRow>
         <div className='history_div'>
           <h5 className='heading_history'>Previous Booking History</h5>
         </div>
       </MDBContainer>
-        <div className='serviceList_container'>
-          <Table>
-            <Thead>
-              <Tr className='list_view_header'>
-                <Th>Booking ID</Th>
-                <Th>Check_in</Th>
-                <Th>Booking Status</Th>
-                <Th>View Details</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {
-                serviceData.map((data)=>{
-                  return(
-                      <Tr className='list_view_history'>
-                        <Td>{data._id}</Td>
-                        <Td>{" "}{moment(data.check_in).format("MMMM Do YYYY")}</Td>
-                        <Td>{data.booking_status}</Td>
-                        <div className='icon_div'>
-                          <Td className='qtyIncrease_Button'><FaFileInvoice onClick={()=>getInvoice(data._id)} /></Td>
-                        </div>
-                      </Tr>
-                  )
-                })
-              }
-            </Tbody>
-          </Table>
-        </div>
+      {
+        dataErr ? <p className='noservice_err'>{dataErr}</p>
+        :
+        <BookingHistory serviceData={serviceData} />
+      }
     </section>
   );
 }

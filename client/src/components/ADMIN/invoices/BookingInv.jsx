@@ -46,7 +46,6 @@ const PreBookingInvAdmin = () => {
         window.print()
     }
 
-
   return (
 
     <div className='main_container'>

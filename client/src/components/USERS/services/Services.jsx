@@ -10,25 +10,25 @@ const services = [
     id:1,
     image: IMG1,
     title: 'Rooms',
-    link: '/rooms'
+    link: '/booking'
   },
   {
     id:2,
     image: IMG2,
     title: 'Travel Packages',
-    link: '/travelPack'
+    link: '/booking'
   },
   {
     id:1,
     image: IMG3,
     title: 'Dining',
-    link: '/diningPack'
+    link: '/booking'
   },
   {
     id:1,
     image: IMG4,
-    title: 'Extra Events',
-    link: '/extraEvents'
+    title: 'Special Events',
+    link: '/booking'
   }
 ]
 
@@ -43,7 +43,7 @@ const Services = () => {
           services.map(({id, image, title, link})=>{
             return(
               <article key={id} className='services__item'>
-                <h3>{title}</h3>
+                <h2>{title}</h2>
                 <div className='services__item-image'>
                   <img src={image} alt={title} />
                 </div>
