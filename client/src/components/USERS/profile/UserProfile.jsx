@@ -81,7 +81,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <section style={{ backgroundColor: 'black' }}>
+    <section  style={{ backgroundColor: 'black' }}>
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol lg="4">

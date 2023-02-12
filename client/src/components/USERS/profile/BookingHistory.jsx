@@ -64,7 +64,7 @@ const BookingHistory = (props) => {
           <TableCell component="th" scope="row">
             {moment(row.bookingData).format("MMMM Do YYYY")}
           </TableCell>
-          <TableCell align="left">{row.form.mobile}</TableCell>
+          <TableCell align="left">{row.booking_status}</TableCell>
           <TableCell align="left">{moment(row.check_in).format("MMMM Do YYYY")}</TableCell>
           <TableCell align="left">{moment(row.check_out).format("MMMM Do YYYY")}</TableCell>
           
@@ -114,7 +114,7 @@ const BookingHistory = (props) => {
     const rows = serviceData
 
   return (
-    <div className='history_constainer'>
+    <section className='history_constainer'>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <TableContainer component={Paper}>
@@ -123,7 +123,7 @@ const BookingHistory = (props) => {
                 <TableRow>
                   <TableCell />
                   <TableCell style={{fontWeight: 'bold'}} align="left">Booking Date</TableCell>
-                  <TableCell style={{fontWeight: 'bold'}} align="left">Mobile Number</TableCell>
+                  <TableCell style={{fontWeight: 'bold'}} align="left">Booking Status</TableCell>
                   <TableCell style={{fontWeight: 'bold'}} align="left">Chech_In</TableCell>
                   <TableCell style={{fontWeight: 'bold'}} align="left">Check_Out</TableCell>
                 </TableRow>
@@ -136,7 +136,7 @@ const BookingHistory = (props) => {
             </Table>
           </TableContainer>
       </ThemeProvider>
-    </div>
+    </section>
   )
 }
 

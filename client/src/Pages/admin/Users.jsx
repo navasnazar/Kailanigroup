@@ -6,7 +6,7 @@ import './userss.css'
 const Users = () => {
   return (
     <div className='main_users_container'>
-        <Sidebar/>
+        <Sidebar users/>
         <UsersDetails/>
     </div>
   )

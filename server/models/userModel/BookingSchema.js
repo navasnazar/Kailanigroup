@@ -41,6 +41,8 @@ const Booking = mongoose.model('Booking', {
         conform_booking : {type: Boolean},
         conform_check_in: {type: Boolean},
         conform_check_out: {type: Boolean},
+        deleteStatus: {type: Boolean},
+        deleteDate: {type: Date},  
 });
 
 module.exports = Booking

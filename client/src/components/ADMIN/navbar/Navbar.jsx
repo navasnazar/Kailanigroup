@@ -23,7 +23,7 @@ const Navbar = () => {
       </div>
       <div className='profile_container'>
         <div className='profile_items'>
-          <p>Navas Nazar</p>
+          <p>Hi, Admin</p>
           <div className='profile_icon'><FiLogOut onClick={()=>handleLogout()}/></div> 
         </div>
       </div>

@@ -134,10 +134,10 @@ const CheckInBooking = () => {
   
   //filter data
   const filterData = bookingData.filter((item)=>{
-    if(item.conform_check_in){
+    if(item.conform_check_in && !item.conform_check_out){
         return item
     }
-})
+  })
 const rows = filterData.reverse();
 
   return (

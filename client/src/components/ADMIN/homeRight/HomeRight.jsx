@@ -2,6 +2,7 @@ import React from 'react'
 import './homeright.css'
 import Navbar from '../navbar/Navbar'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import HomeBottom from './HomeBottom';
 
 const HomeRight = () => {
   const data1 = [
@@ -96,6 +97,7 @@ const HomeRight = () => {
   ]
   
   return (
+    <>
     <div className='home_rightbar_container'>
       <Navbar/>
         <div>
@@ -145,7 +147,13 @@ const HomeRight = () => {
           </div>
           <div></div>
         </div>
+      <HomeBottom/>
+
     </div>
+
+  
+    </>
+    
   )
 }
 

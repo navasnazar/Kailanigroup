@@ -23,6 +23,7 @@ import {useDispatch} from 'react-redux'
 import {getBookingID} from '../../../redux/userReducer'
 import {axiosUserInstance} from '../../../Instance/Axios'
 import { Navigate } from 'react-router-dom'
+import emailjs from 'emailjs-com'
 
 
 
@@ -118,6 +119,7 @@ export default function ProductCards() {
                 setFormErr(resp.data.data)
             }
             if(resp.data.status=='done'){
+                emailjs.sendForm('service_rwy3xu9', 'template_itd4q1n', form.current, 'XBJcDC5HcRaKtdXxM')
                 dispatch(getBookingID(resp.data.data))
                 setFormErr('')
                 navigate('/invoice')

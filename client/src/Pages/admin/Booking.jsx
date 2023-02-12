@@ -9,7 +9,7 @@ const Booking = () => {
   return (
     <>
       <div className='main_booking_container'>
-        <Sidebar/>
+        <Sidebar booking/>
         <AdminBookingDetails/>
     </div>
     </>

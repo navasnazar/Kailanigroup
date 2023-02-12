@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <div className='main_home_container'>
-        <Sidebar/>
+        <Sidebar home/>
         <HomeRight/>
     </div>
   )

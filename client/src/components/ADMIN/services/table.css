@@ -7,9 +7,24 @@
     margin-left: 2rem;
 }
 .image_field{
-    display: flex;
+    display: flex !important;
+    flex-direction: row;
+    
 }
 .image_btn{
     margin: 2rem;
     display: flex;
+}
+.image_field_input{
+    padding: 0.5rem;
+    width: 17rem;
+    gap: 1rem;
+}
+.image_field_form{
+    display: flex;
+    margin-left: 1rem;
+}
+.image_upload_container{
+    display: flex !important;
+    flex-wrap: wrap;
 }

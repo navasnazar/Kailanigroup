@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 module.exports={
     getAvailableServices:((req, res)=>{
         const data = req.body
-        console.log('data :', data);
         userHelpers.findServices(data).then((response)=>{
             if(response==='data not fount'){
                 res.json({status:'Err'})

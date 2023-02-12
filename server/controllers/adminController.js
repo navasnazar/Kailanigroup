@@ -21,7 +21,6 @@ const createAccessToken = (payload)=>{
 
 module.exports={
     adminLogin:((req, res)=>{
-        console.log('xxx');
         let data = req.body
         adminHelpers.login(data).then((response)=>{
             const [validation, token]=response
@@ -72,6 +71,7 @@ module.exports={
     }),
     addService:(async(req, res)=>{
         let serviceData = req.body
+        console.log(serviceData);
         adminHelpers.addNewService(serviceData).then((response)=>{
             res.json({status:'done', id:serviceData._id})
         })

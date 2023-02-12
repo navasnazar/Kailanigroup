@@ -36,6 +36,7 @@ module.exports={
     }),
     createUser:(userData)=>{
         let validation = {email:false, mobile:false, done:false}
+        let today = Date.now()
         return new Promise(async(resolve, reject)=>{
             userData.password = await bcrypt.hash(userData.password,10),
             await UserDB.findOne({email:userData.email}).then((data)=>{
@@ -49,6 +50,7 @@ module.exports={
                         name: userData.nickname,
                         mobile: userData.phone,
                         blockStatus: false,
+                        signupDate: today
                     })
                     new_user.save().then((response)=>{
                         validation.done=true
@@ -110,7 +112,6 @@ module.exports={
         if(!bookingDetails.rooms){
             bookingDetails.rooms='1';
         }
-        console.log('dfgdghf',dateRange);
         return new Promise(async(resolve, reject)=>{
             let userCart = await CartDB.findOne({userId:userDetails.userID})
             if(userCart){
@@ -356,6 +357,7 @@ module.exports={
                 conform_booking : false,
                 conform_check_in: false,
                 conform_check_out: false,
+                deleteStatus: false
             })
             booking_service.save().then((response)=>{
                 resolve(response)

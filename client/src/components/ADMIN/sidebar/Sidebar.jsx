@@ -7,7 +7,8 @@ import {FiUsers} from 'react-icons/fi'
 import LOGO from '../../../assets/Images/logo.png'
 import {NavLink, Link} from 'react-router-dom'
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+  let selected = props
   return (
     <div className='main_Sidebar_Container'>
       <div>
@@ -17,19 +18,19 @@ const Sidebar = () => {
         <ul className='ul_container'>
           <li className='li_container'>
             <div className='sidebar_icons'><AiOutlineHome/></div>
-            <Link className='sidebar_menu' to='/admin'>Home</Link>
+            <Link className={selected.home ? 'sidebar_menu_selected' : 'sidebar_menu'} to='/admin'>Home</Link>
           </li>
           <li className='li_container'>
             <div className='sidebar_icons'><RiServiceLine/></div>
-            <Link className='sidebar_menu' to="/admin/services">Services</Link>
+            <Link className={selected.services ? 'sidebar_menu_selected' : 'sidebar_menu'} to="/admin/services">Services</Link>
           </li>
           <li className='li_container'>
             <div className='sidebar_icons'><FiGrid/></div>
-            <Link className='sidebar_menu' to="/admin/booking">Booking</Link>
+            <Link className={selected.booking ? 'sidebar_menu_selected' : 'sidebar_menu'} to="/admin/booking">Booking</Link>
           </li>
           <li className='li_container'>
             <div className='sidebar_icons'><FiUsers/></div>
-            <Link className='sidebar_menu' to="/admin/users">Users</Link>
+            <Link className={selected.users ? 'sidebar_menu_selected' : 'sidebar_menu'} to="/admin/users">Users</Link>
           </li>
           
         </ul>

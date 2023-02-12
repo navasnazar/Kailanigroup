@@ -146,8 +146,12 @@ const Table = () => {
       }));
 
       const handleAddData = async()=>{
-        
-        const response = await axiosAdminInstance.post('/addServices',uploadImagUrl, {uploadData}).then((status)=>{
+        const token = localStorage.getItem('admin')
+        const response = await axiosAdminInstance.post('/addServices',{uploadImagUrl, uploadData},
+        {
+          headers: {Authorization: token}
+        }
+        ).then((status)=>{
             const randomNumber = Math.random()* 1000;
             setRender(randomNumber)
             setUploadImgBtn1(true)
@@ -237,15 +241,16 @@ const Table = () => {
 
   return (
     <div>
+      <div className='image_upload_container'>
       {
             dataSubmit=='done' ? 
         
                 <div className="image_field">
-                    { uploadImgBtn1 ? <form  onSubmit={(e)=>{
+                    { uploadImgBtn1 ? <form className='image_field_form' onSubmit={(e)=>{
                                 uploadImageFun1(e)
                             }} >
                     <p> Images 1</p>
-                    <input type="file" multiple
+                    <input className='image_field_input' type="file" multiple
                            onChange={ (e)=>{
                                 setUploadImg1(e.target.files)
                             }}
@@ -258,11 +263,11 @@ const Table = () => {
                     </button>
                     </form> : ''}
 
-                    {uploadImgBtn2 ? <form  onSubmit={(e)=>{
+                    {uploadImgBtn2 ? <form className='image_field_form' onSubmit={(e)=>{
                                 uploadImageFun2(e)
                             }} >
                     <p> Images 2</p>
-                    <input type="file" multiple
+                    <input className='image_field_input' type="file" multiple
                            onChange={ (e)=>{
                                 setUploadImg2(e.target.files)
                             }}
@@ -275,11 +280,11 @@ const Table = () => {
                     </button>
                     </form> : ''}
 
-                    {uploadImgBtn3 ? <form  onSubmit={(e)=>{
+                    {uploadImgBtn3 ? <form className='image_field_form' onSubmit={(e)=>{
                                 uploadImageFun3(e)
                             }} >
                     <p> Images 3</p>
-                    <input type="file" multiple
+                    <input className='image_field_input' type="file" multiple
                            onChange={ (e)=>{
                                 setUploadImg3(e.target.files)
                             }}
@@ -292,11 +297,11 @@ const Table = () => {
                     </button>
                     </form> : ''}
 
-                    {uploadImgBtn4 ? <form  onSubmit={(e)=>{
+                    {uploadImgBtn4 ? <form className='image_field_form' onSubmit={(e)=>{
                                 uploadImageFun4(e)
                             }} >
                     <p> Images 4</p>
-                    <input type="file" multiple
+                    <input className='image_field_input' type="file" multiple
                            onChange={ (e)=>{
                                 setUploadImg4(e.target.files)
                                 setUploadImgBtn4(true)
@@ -312,6 +317,8 @@ const Table = () => {
             </div>
         : ''
         }
+      </div>
+      
         <div>
             <FormControlLabel
                 control={<MaterialUISwitch 

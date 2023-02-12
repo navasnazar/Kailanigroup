@@ -184,7 +184,7 @@ const AdminBookingDetails = () => {
           <TableCell align="left">{moment(row.check_in).format("MMMM Do YYYY")}</TableCell>
           <TableCell align="left">{moment(row.check_out).format("MMMM Do YYYY")}</TableCell>
           <TableCell align="left">
-                <Space className='switch_button' direction="vertical">
+                <Space className='switch_button_ctl' direction="vertical">
                   {
                     row.conform_check_in ? 
                       <Switch disabled
@@ -200,7 +200,7 @@ const AdminBookingDetails = () => {
                             defaultChecked />
                   }
                 </Space>
-                <Space className='switch_button' direction="vertical">
+                <Space className='switch_button_ctl' direction="vertical">
                   {
                     row.conform_booking ?
 
@@ -225,7 +225,7 @@ const AdminBookingDetails = () => {
                       unCheckedChildren="Pending" defaultunChecked />
                   }
                 </Space>
-                <Space className='switch_button' direction="vertical">
+                <Space className='switch_button_ctl' direction="vertical">
                 {
                     row.conform_check_in ?
                     
@@ -350,8 +350,12 @@ const AdminBookingDetails = () => {
       </>
     )
   }
-  
-  const rows = bookingData.reverse();
+  const filterData = bookingData.filter((item)=>{
+    if(!item.deleteStatus){
+        return item
+    }
+  })
+  const rows = filterData.reverse();
 
   const handleDropdown = ()=>{
     setAllBookingPage(false)

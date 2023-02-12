@@ -386,7 +386,7 @@ const HomeNav = () => {
                 },
               ]}
             >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
             </Form.Item>
             <Form.Item
               name="password"

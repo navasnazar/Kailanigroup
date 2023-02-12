@@ -134,7 +134,7 @@ const AppBookingDetails = () => {
 
   //filter data
   const filterData = bookingData.filter((item)=>{
-        if(item.conform_booking){
+        if(item.conform_booking && !item.conform_check_in){
             return item
         }
   })

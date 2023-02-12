@@ -1,6 +1,7 @@
 .main_Sidebar_Container{
     flex: 0.8;
     height: 100vh;
+    background: black;
 }
 .logo_container{
     margin: 1rem;
@@ -35,6 +36,13 @@ nav a:hover{
 nav a.active{
     background: var(--color-primary);
     color: var(--color-bg);
+}
+.sidebar_menu_selected{
+    text-decoration: none;
+    background-color: rgb(64, 67, 67);
+    padding: 0.5rem;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
 }
 .sidebar_menu{
     text-decoration: none;

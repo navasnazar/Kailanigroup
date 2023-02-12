@@ -7,7 +7,7 @@ const Services = () => {
   return (
     <>
       <div className='main_services_container'>
-        <Sidebar/>
+        <Sidebar services/>
         <AdminServices/>
       </div>
     </>

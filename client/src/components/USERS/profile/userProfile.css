@@ -98,4 +98,7 @@
       .serviceList_container{
         padding: 1rem 1rem;
     }
+    .profile_container{
+      margin-top: -7rem;
+    }
 }

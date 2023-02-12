@@ -5,11 +5,11 @@ import UserProfile from '../../components/USERS/profile/UserProfile'
 
 const Profile = () => {
   return (
-    <>
+    <div style={{minWidth:'100%'}}>
         <UserProfile/>
         <ProfileNav/>
         <Footer/>
-    </>
+    </div>
   )
 }
 

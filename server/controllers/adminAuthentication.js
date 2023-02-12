@@ -5,7 +5,7 @@ const userAuthentication = async (req, res, next) => {
   // verify user is authenticated
   const token = req.header("Authorization")
   
-
+  console.log('token :', token);
   try {
     const { admin } = jwt.verify(token, process.env.SECRET_TOKEN_ADMIN)
     req.user = await AdminDB.findOne({username:admin})

@@ -1,0 +1,32 @@
+.container_report{
+    width: 100%;
+    flex: 4;
+    padding: 1rem;
+}
+
+.report_container{
+    display: flex;
+    justify-content: space-between !important;
+    flex-wrap: wrap;
+    margin-top: 7rem;
+}
+.report_container1{
+    background-color: transparent;
+    width: 378px;
+    color: var(--color-white);
+    text-align: center;
+    display: flex;
+    border-radius: 10px;
+    margin-top: 1rem;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    align-items: center;
+}
+.report_content{
+    margin: 1rem 0.6rem;
+}
+
+.report_content1{
+    margin: 1rem 0.5rem;
+    color: rgb(184, 184, 1);
+    font-size: 20px;
+}

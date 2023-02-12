@@ -31,8 +31,8 @@
     z-index: -1;
 }
 
-.switch_button{
-    padding: 1rem;
+.switch_button_ctl{
+    padding: 0.5rem;
 }
 
 .delete_icon{

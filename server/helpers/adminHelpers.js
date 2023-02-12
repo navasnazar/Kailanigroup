@@ -65,14 +65,14 @@ module.exports={
     addNewService:(data)=>{
         return new Promise(async(resolve, reject)=>{
             let new_service = new ServiceDB({
-                title: data.data.title,
-                service: data.data.service,
-                description: data.data.description,
-                amount: data.data.amount,
-                img1_url: data.img1_url,
-                img2_url: data.img2_url,
-                img3_url: data.img3_url,
-                img4_url: data.img4_url,
+                title: data.uploadData.title,
+                service: data.uploadData.service,
+                description: data.uploadData.description,
+                amount: data.uploadData.amount,
+                img1_url: data.uploadImagUrl.img1_url,
+                img2_url: data.uploadImagUrl.img2_url,
+                img3_url: data.uploadImagUrl.img3_url,
+                img4_url: data.uploadImagUrl.img4_url,
             })
             new_service.save().then((response)=>{
                 resolve(response)
@@ -112,7 +112,8 @@ module.exports={
                 console.log(err);
             })
         })
-    },getBookingDatas:(bookingID)=>{
+    },
+    getBookingDatas:(bookingID)=>{
         return new Promise(async(resolve, reject)=>{
             await BookingDB.findOne({_id:bookingID}).then((data)=>{
                 resolve(data)
@@ -207,13 +208,19 @@ module.exports={
     },
     DeleteBookingDet:(id)=>{
         let validation = {done:false, err:false}
+        let today = Date.now()
         return new Promise(async(resolve, reject)=>{
             let data = await BookingDB.findOne({_id:id})
             if(data.booking_status=='Approved'){
                 validation.err=true
                 resolve(validation)
             }else{
-                BookingDB.remove({_id:id}).then((resp)=>{
+                BookingDB.updateOne({_id:id},
+                    {$set:{
+                        deleteStatus: true,
+                        deleteDate: today
+                        }
+                    }).then((resp)=>{
                     validation.done=true
                     resolve(validation)
                 })
