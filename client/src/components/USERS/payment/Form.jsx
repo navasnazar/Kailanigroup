@@ -48,7 +48,11 @@ const FormDetails = () => {
   const sendEmail = async(e) => {
     e.preventDefault();
     const token = localStorage.getItem('userToken')
-    const response = await axiosUserInstance.patch('/form', {data:data, user:user}).then((resp)=>{
+    const response = await axiosUserInstance.post('/form', {data:data, user:user},
+    {
+      headers: {Authorization: token}
+    }
+    ).then((resp)=>{
         let x = Math.random()
         setRender(x)
         toast.success('Submitted Success!', {
