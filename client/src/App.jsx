@@ -30,7 +30,6 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<HomePage/>} />
-            {/* <Route exact path="/login" element={<Register/>} /> */}
             <Route exact path="/gallery" element={<Gallery/>} />
             <Route path="/booking" element={user ? <Booking/> : <Navigate to='/'/>} />
             <Route path="/proceed" element={user ? <Payment/> : <Navigate to='/'/>} />
