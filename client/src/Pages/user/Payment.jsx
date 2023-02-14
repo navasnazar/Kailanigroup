@@ -24,7 +24,6 @@ const Payment = () => {
               headers: {Authorization: token}
           }
           ).then((resp)=>{
-            console.log('ggggg:', resp);
               if(resp.data.status=='done'){
                   setProceedErr(true)
               }

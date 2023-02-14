@@ -70,9 +70,7 @@ const HomeBottom = () => {
     }
   })
 
-  
-  
-  console.log('previous: ', )
+
 
 
   return (

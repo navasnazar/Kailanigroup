@@ -39,17 +39,13 @@ const Home = () => {
       progress: undefined,
       theme: "dark",
     })
-    return(
-      <>
-        <ToastContainer/>
-      </>
-    )
   }
 
   
   return (
     <>  
       {reload? <Logout /> : ''}
+      <ToastContainer/>
       <Header/>
       <HomeNav/>
       <About/>

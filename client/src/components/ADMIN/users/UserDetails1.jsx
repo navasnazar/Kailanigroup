@@ -33,7 +33,6 @@ function UserDetails1() {
       },
     };
     const data = await axiox.put(`http://localhost:3500/admin/block/${id}`,config);
-    console.log(data);
     if (data.blocked) {
       setUserDetails(data.userDetails);
     }
@@ -49,7 +48,6 @@ function UserDetails1() {
       },
     };
     const data = await axiox.put(`http://localhost:3500/admin/unblock/${id}`,config);
-    console.log(data);
     if (data.blocked) {
       window.location.reload(true);
       setUserDetails(data.userDetails);

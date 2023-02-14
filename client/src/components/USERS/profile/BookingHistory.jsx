@@ -16,7 +16,6 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import moment from "moment";
 import {FaFileInvoice} from 'react-icons/fa'
 import {useDispatch} from 'react-redux'
-import {getPreBookingInvoiceAdmin} from '../../../redux/adminReducer'
 import { useNavigate } from 'react-router-dom'
 import {getPreBookingInvoice} from '../../../redux/userReducer'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -41,8 +40,8 @@ const BookingHistory = (props) => {
       }
 
       const handleInvoice = (id)=>{
-        dispatch(getPreBookingInvoiceAdmin(id)) 
-        navigate('/admin/PreInvoice')
+        dispatch(getPreBookingInvoice(id)) 
+        navigate('/PreInvoice')
       }
 
     function Row(props) {

@@ -95,9 +95,9 @@ const FormDetails = () => {
             }
 
             {formData ?
-            <input onChange={updateData} type="text" name='mobile' placeholder='Enter your Mobile Number'  defaultValue={formData.mobile} required/>
+            <input onChange={updateData} type="tel" name='mobile' placeholder='Enter your Mobile Number'  defaultValue={formData.mobile} required/>
             :
-            <input onChange={updateData} type="text" name='mobile'  placeholder='Enter your Mobile Number' required/>
+            <input onChange={updateData} type="tel" name='mobile'  placeholder='Enter your Mobile Number' required/>
             }
 
             {formData ?

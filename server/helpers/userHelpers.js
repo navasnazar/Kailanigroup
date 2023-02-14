@@ -156,7 +156,7 @@ module.exports={
                 }
             }else{
                 let serviceDetails = await ServiceDB.findOne({_id:serviceId})
-                var cart_service = new CartDB({
+                let cart_service = new CartDB({
                     userId: userDetails.userID,
                     userMail: userDetails.user,
                     services: [ 
@@ -270,7 +270,7 @@ module.exports={
                     resolve(resp)
                  })
            }else{
-            var user_form = new FormDB({
+            let user_form = new FormDB({
                 userId: user.userID,
                 userMail: user.user,
                         address:formData.address,
@@ -339,7 +339,7 @@ module.exports={
     bookingSubmit:(user, bookingDetails, FinalAmount, form)=>{
         let today = Date.now();
         return new Promise((resolve, reject)=>{
-            var booking_service = new BookingDB({
+            let booking_service = new BookingDB({
                 userId: user.userID,
                 userMail: user.user,
                 services: bookingDetails.services,

@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 const { response } = require('../app');
 const router = express.Router();
 const adminController = require('../controllers/adminController')
@@ -9,8 +9,7 @@ const adminAuthentication = require('../controllers/adminAuthentication')
 router.post('/login',adminController.adminLogin)
 router.post('/recovermail',adminController.passRecover)
 
-router.use(auth)
-router.post('/resetpass', adminController.resetPassword)
+router.post('/resetpass', auth, adminController.resetPassword)
 
 router.use(adminAuthentication)
 router.get('/services', adminController.getServices)

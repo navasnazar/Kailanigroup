@@ -14,6 +14,5 @@ ReactDOM.render(
         <PersistGate persistor={persistor}>
             <App/>
         </PersistGate>
-    </Provider>,
-    
-    document.querySelector("#root"))
+    </Provider>,document.querySelector("#root")
+    )

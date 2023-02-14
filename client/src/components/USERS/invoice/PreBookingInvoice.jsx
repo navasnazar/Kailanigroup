@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Col, Divider, Row, Table } from 'antd'
 import './invoiceFirst.css'
-import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'

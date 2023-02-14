@@ -49,7 +49,7 @@ module.exports={
                     resolve(validation)
                 }
             }).catch((err)=>{
-                console.log('error',err);
+                console.log(err);
             })
         })
     },

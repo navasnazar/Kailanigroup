@@ -19,7 +19,6 @@ import Err404 from './Pages/Err'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
-
 const App = () => {
 
   const user = useSelector((state)=>state.user.loginUserDetails)
@@ -31,6 +30,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<HomePage/>} />
+            {/* <Route exact path="/login" element={<Register/>} /> */}
             <Route exact path="/gallery" element={<Gallery/>} />
             <Route path="/booking" element={user ? <Booking/> : <Navigate to='/'/>} />
             <Route path="/proceed" element={user ? <Payment/> : <Navigate to='/'/>} />

@@ -68,7 +68,6 @@ const BookingAvailability = () => {
         })
     }
 
-    console.log('available data :', availableData);
 
     const form = useRef();
 

@@ -71,7 +71,6 @@ module.exports={
     }),
     addService:(async(req, res)=>{
         let serviceData = req.body
-        console.log(serviceData);
         adminHelpers.addNewService(serviceData).then((response)=>{
             res.json({status:'done', id:serviceData._id})
         })

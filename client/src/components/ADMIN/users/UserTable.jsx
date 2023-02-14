@@ -40,7 +40,6 @@ const UserTable = () => {
     }
 
     const handleBlockStatus = async (data)=>{
-        console.log(data)
         let blockedUserId = data._id
         const token = localStorage.getItem('admin')
         const response = await axiosAdminInstance.post('/blockStatus', {blockedUserId},

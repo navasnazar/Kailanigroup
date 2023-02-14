@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './nav.css'
 import {Link} from 'react-router-dom'
 import {AiOutlineHome, AiOutlineUser} from 'react-icons/ai'
@@ -15,25 +15,11 @@ import {useSelector} from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {axiosUserInstance} from '../../../Instance/Axios'
-
-//Registration details
-import {
-  Form,
-  Input,
-  Tooltip,
-  Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-  AutoComplete,
-  Modal
-} from 'antd';
-// import "antd/dist/antd.css";
-import { QuestionCircleOutlined } from '@ant-design/icons';
-//registration details end....
-
+import { Form, Input, Tooltip, Cascader, Select, Row,
+        Col, Checkbox, Button, AutoComplete, Modal } from 'antd';
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import app from './firebase'
+const auth = getAuth(app);
 
 const HomeNav = () => {
   const [activeNav, setActiveNav]=useState('#')
@@ -41,22 +27,24 @@ const HomeNav = () => {
   const [navActive, setNavActive]=useState(true)
   const [regErr, setRegErr]=useState('')
   const [loginErr, setLoginErr]=useState('')
-  
-  const dispatch = useDispatch();
+  const [mobileVerify, setMobileVerify]=useState(true)
+  const [submitSignup, setSubmitSignup]=useState(false)
+  const [navVisible, setNavVisible] = useState(false);
+  const [verifyOTP, setVerifyOTP]=useState(false)
+  const [verified, setVerified]=useState(false)
+  const [regAllData, setRegAllData]=useState({})
+
+
+  const dispatch = useDispatch(); 
   const userId = useSelector((state) => state.user.loginUserDetails.userID);
 
 
-  // login section start
   const registerCall = ()=>{
-    
-    setVisible(false)
+    setNavVisible(false)
     setLoginVisible(true)
     setNavActive(false)
   }
   
-
-  //forms functions start........
-
 
   const formItemLayout = {
     labelCol: {
@@ -76,44 +64,54 @@ const HomeNav = () => {
       },
     },
   };
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
-    },
-  };
 
-  const [visible, setVisible] = useState(false);
   
 
 // register call start -------------------->
   const onCreate = async (values) => {
-    const response = await axiosUserInstance.post('/signup',values).then((res)=>{
-      let resData = res.data
-      if(resData.status=='err'){
-        setRegErr(resData.data)
-      }
-      if(resData.status=='done'){
-        setVisible(false);
-        setLoginVisible(true)
-        toast.success('Register Success!', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      }
-    })
+    // if(verified){
+      const response = await axiosUserInstance.post('/signup',values).then((res)=>{
+        let resData = res.data
+        if(resData.status=='err'){
+          toast.error('Already Registered! Please login', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+        if(resData.status=='done'){
+          setNavActive(false)
+          setNavVisible(false);
+          setLoginVisible(true)
+          toast.success('Register Success!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      })
+    // }else{
+    //   toast.error('please verify mobile', {
+    //     position: "top-right",
+    //     autoClose: 3000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "dark",
+    //   });
+    // }
   };
 // register call end -------------------->
 
@@ -124,11 +122,93 @@ const HomeNav = () => {
   const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
     const [form] = Form.useForm();
 
+    const onNumberSubmit = ()=>{
+      const allData = form.getFieldValue()
+      setRegAllData(allData)
+      const phone = allData.phone
+      onSignSubmit(phone);
+    }
+
+    const onSubmitOTP = async()=>{
+      const otp = form.getFieldValue('OTP')
+      verifyCode(otp)
+    }
+
+    const onCaptchaVerify = ()=>{
+      window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible',
+        'callback': (response) => {
+          onSignSubmit();
+        }
+      }, auth);
+    } 
+
+      const onSignSubmit = async(data)=>{
+        onCaptchaVerify();
+        const phoneNumber = `+91${data}`
+        const appVerifier = window.recaptchaVerifier;
+        signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          setVerifyOTP(true)
+          toast.success('OTP Sended!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }).catch((error) => {
+          toast.error('Oops!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        });
+      }
+      const verifyCode =(otp)=>{
+        window.confirmationResult.confirm(otp).then((result) => {
+          const user = result.user;
+          toast.success('Verification Done!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          setVerified(true)
+          setMobileVerify(false)
+        }).catch((error) => {
+          toast.error('Invalid OTP!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          setVerified(false)
+        });
+      } 
+        
 
     return (
       <div>
         <Modal
-        visible={visible}
+        open={visible}
         title="Register"
         okText="Register"
         cancelText="Cancel"
@@ -206,7 +286,7 @@ const HomeNav = () => {
               }),
             ]}
           >
-            <Input.Password />
+          <Input.Password />
           </Form.Item>
 
           <Form.Item
@@ -235,19 +315,75 @@ const HomeNav = () => {
               {
                 required: true,
                 message: 'Please input your phone number!',
-              },
+              }
             ]}
           >
             <Input
-              
               style={{
                 width: '100%',
               }}
+              maxLength='10'
             />
           </Form.Item>
 
+          {/* <Form.Item>
+              <Input
+                onClick={onNumberSubmit}
+                type='button'
+                value={verified ? 'verified' :'verify'}
+                style={{
+                  width: '30%',
+                  marginTop:'3px',
+                  color:'blue'
+                }}
+              />
+          </Form.Item> */}
+
+                {
+                  verifyOTP ?
+                  <div>
+
+                  <Form.Item
+                      name="OTP"
+                      label="OTP"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please input your phone number OTP',
+                        },
+                      ]}
+                    >
+                      <Input
+                      maxLength='6'
+                      
+                        style={{
+                          width: '100%',
+                        }}
+                      />
+                    </Form.Item>
+
+                    <Form.Item>
+                      <Input
+                        onClick={onSubmitOTP}
+                        type='button'
+                        value='Submit'
+                        style={{
+                          width: '30%',
+                          marginTop:'3px',
+                          color:'blue'
+                        }}
+                      />
+                    </Form.Item>
+                  </div>
+                  :
+                  ''
+                }
+                  
         </Form>
         <div className='loginSection'>
+        </div>
+        <div id='recaptcha-container'>
+
         </div>
         
         <div>
@@ -262,13 +398,9 @@ const HomeNav = () => {
 
 
 
-
-
-
-
-
 // login start -------------------->
   const onFinish = async (values) => {
+    setSubmitSignup(true)
     const response = await axiosUserInstance.post('/login',values).then((res)=>{
       let resData = res.data
       if(resData.status=='err'){
@@ -278,7 +410,7 @@ const HomeNav = () => {
         localStorage.setItem('userToken', resData.user)
         const user = jwt(resData.user)
         dispatch(getUserLoginDetails(user))
-        setVisible(false);
+        setNavVisible(false);
         setLoginVisible(false)
         setNavActive(true)
         toast.success('Login Success!', {
@@ -303,8 +435,6 @@ const HomeNav = () => {
     setNavActive(true)
   }
 
-
-
   return (
     <nav>
       <div>
@@ -318,24 +448,26 @@ const HomeNav = () => {
                 </a>
                 
                 <div>
-                  
                     {userId ? 
-                    <Link to="/profile"><AiOutlineUser/></Link> :
+                    <Link to="/profile"><AiOutlineUser/></Link> 
+                    :
+                    // <Link to="/login"><AiOutlineUser/></Link> 
+                  
                       <div>
                         <Button className='registerButton'
                         type=''
                           onClick={() => {
-                            setVisible(true);
+                            setNavVisible(true);
                           }}
                         >
                           <AiOutlineUser/>
                         </Button>
                           <CollectionCreateForm
                             className='formReg'
-                            visible={visible}
+                            visible={navVisible}
                             onCreate={onCreate}
                             onCancel={() => {
-                              setVisible(false);
+                              setNavVisible(false);
                             }}
                           />
                       </div>
@@ -382,7 +514,7 @@ const HomeNav = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your Username!',
+                  message: 'Please input your Email!',
                 },
               ]}
             >
@@ -403,15 +535,6 @@ const HomeNav = () => {
                 placeholder="Password"
               />
             </Form.Item>
-            {/* <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
-
-              <a className="login-form-forgot" href="">
-                Forgot password
-              </a>
-            </Form.Item> */}
 
             <Form.Item>
               <Button  type="primary" htmlType="submit" className="login-form-button">
