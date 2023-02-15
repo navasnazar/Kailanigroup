@@ -4,10 +4,10 @@ const session=require('express-session')
 const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config({ path: "config.env" })
-const path1 = require('path');
+const path = require('path');
 
 const port = process.env.PORT
-const path = port
+const path1 = port
 
 var db=require('./config/database')
 
@@ -31,11 +31,11 @@ app.use('/admin', adminRouter);
 app.use('/', usersRouter);
 
 // for sever
-app.use(express.static(path1.join(__dirname, '/client/build/')));
+app.use(express.static(path.join(__dirname, '../client/build/')));
 // for sever
 
 app.get('*', (req, res) => {
-  res.sendFile(path1.join(__dirname, '/client/build/index.html'));
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 // catch 404 and forward to error handler

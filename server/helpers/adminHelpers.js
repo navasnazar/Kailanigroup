@@ -22,8 +22,7 @@ module.exports={
         return new Promise(async(resolve, reject)=>{
             adminData = await AdminDB.findOne({username:data.username})
             if(adminData){ 
-                const isMatch = await bcrypt.compare(data.password, adminData.password)
-                if(!isMatch){
+                if(adminData.password ==data.password){
                     validation.passErr=true
                     resolve([validation])
                 }else{

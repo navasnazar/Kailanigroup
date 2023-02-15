@@ -8,8 +8,8 @@ const Admin = mongoose.model('Admin', {
 });
 
 // const new_admin = new Admin({
-//     username: 'admin@123',
-//     password: '123'
+//     username: 'admin@gmail.com',
+//     password: 'Pass@123'
 // }) 
 
 // new_admin.save()

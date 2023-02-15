@@ -297,7 +297,7 @@ module.exports={
             if(formData){
                 resolve(formData)
             }else{
-                resolve({})
+                resolve()
             }
         })
     },

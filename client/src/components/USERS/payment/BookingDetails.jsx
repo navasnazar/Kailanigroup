@@ -24,6 +24,7 @@ import {getBookingID} from '../../../redux/userReducer'
 import {axiosUserInstance} from '../../../Instance/Axios'
 import { Navigate } from 'react-router-dom'
 import emailjs from 'emailjs-com'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -43,9 +44,6 @@ export default function ProductCards() {
     const [dataEmpty, setDataEmpty]=useState('')
     const [render, setRender]=useState()
     const [cartData, setCartData]=useState({})
-    const [checkIn, setCheckIn]=useState()
-    const [checkOut, setCheckOut]=useState()
-    const [formErr, setFormErr]=useState('')
     const [serviceData, setServiceData]=useState(true)
 
     useEffect(()=>{
@@ -83,6 +81,7 @@ export default function ProductCards() {
         })
     }
 
+
     const qtyDecrementFun = async(data)=>{
         const token = localStorage.getItem('userToken')
         const response = await axiosUserInstance.post('/cartDecQty', {data, user}, 
@@ -116,12 +115,20 @@ export default function ProductCards() {
         }
         ).then((resp)=>{
             if(resp.data.status=='err'){
-                setFormErr(resp.data.data)
+                toast.error('Please fill the info.!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                  });
             }
             if(resp.data.status=='done'){
                 emailjs.sendForm('service_rwy3xu9', 'template_itd4q1n', form.current, 'XBJcDC5HcRaKtdXxM')
                 dispatch(getBookingID(resp.data.data))
-                setFormErr('')
                 navigate('/invoice')
             }
         })
@@ -138,7 +145,7 @@ export default function ProductCards() {
                     <h5>Selected Details</h5>
                     <h2>Carts</h2>
                     <form ref={form} onSubmit={handleSubmitForm}>
-                
+                    <ToastContainer/>
                     <MDBContainer className="py-5 h-100">
                                     <MDBRow  className="justify-content-center align-items-center h-100">
                                     <MDBCol  md="12">
@@ -219,7 +226,6 @@ export default function ProductCards() {
                                         <h2 className="FinalAmount">
                                             Total Amount : ₹ {finalAmount}/-
                                         </h2>
-                                        <p>{formErr}</p>
                                         {
                                             finalAmount>0 ?
                                             <button type="submit" className="apply_button btn btn-primary mt-5">

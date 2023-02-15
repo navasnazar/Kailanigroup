@@ -85,7 +85,7 @@ const AdminLogin = () => {
               required
               onChange={(e)=>setPassword(e.target.value)}
             />
-            <a onClick={()=>setForPass(!forPass)}>forgot password ?</a>
+            {/* <a onClick={()=>setForPass(!forPass)}>forgot password ?</a> */}
             <button type='submit' className='btn btn-primary'>Login</button>
           </form>
           <div> {

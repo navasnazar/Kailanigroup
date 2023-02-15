@@ -75,7 +75,7 @@ const FormDetails = () => {
   return (
     <section id='form'>
       <h5>Form</h5>
-      <h2>Full your Info.</h2>
+      <h2>Fill your Info.</h2>
       <ToastContainer/>
       <div className='container form__container'>
         

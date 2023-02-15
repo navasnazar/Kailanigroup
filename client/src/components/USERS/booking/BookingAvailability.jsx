@@ -160,6 +160,7 @@ const BookingAvailability = () => {
                             className='datepickerItem'
                             dateFormat="dd/MM/yyyy"
                             minDate={new Date()}
+                            required
                             selectsRange={true}
                             startDate={startDate}
                             endDate={endDate}
@@ -169,10 +170,6 @@ const BookingAvailability = () => {
                             withPortal
                             />
                     </div>
-                    {/* <div className="box">
-                        <p>Check out</p>
-                        <input onChange={updateData} type="date" name="check_out" className="input" required/>
-                    </div> */}
                     <div className="box">
                         <p>Adults</p>
                         <select onChange={updateData} name="adults" className="input" required>
